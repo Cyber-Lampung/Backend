@@ -9,7 +9,7 @@ app.use(cors());
 app.post("/Register", (req, res) => {
   const { email, username, password } = req.body;
 
-  console.log(email);
+  console.log(email, username);
 });
 
 app.listen(3000, () => {
