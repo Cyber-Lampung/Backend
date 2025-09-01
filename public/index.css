@@ -1,0 +1,125 @@
+/* for desktop view */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.boxLogin {
+  border: solid 2px black;
+  width: 290px;
+  height: 280px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.Title h1 {
+  font-family: sans-serif;
+  font-size: 25px;
+}
+
+.InputSytem {
+  margin-top: 40px;
+}
+
+.email {
+  padding: 8px;
+  width: 250px;
+  border-radius: 10px;
+  border: solid 2px black;
+  outline: none;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.password {
+  padding: 8px;
+  width: 210px;
+  border-radius: 10px;
+  border: solid 2px black;
+  outline: none;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: sans-serif;
+}
+
+.Btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn {
+  width: 200px;
+  padding: 9px;
+  background: linear-gradient(to left, blue, red);
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.lpPass {
+  margin-top: 30px;
+  display: flex;
+  font-family: sans-serif;
+  gap: 1rem;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lpPass a {
+  text-decoration: none;
+  font-family: 12px;
+}
+
+.notification {
+  position: absolute;
+  top: -40px;
+  display: flex;
+  justify-content: center;
+}
+
+.SuccesStatus {
+  position: absolute;
+  z-index: 99;
+  background-color: rgb(11, 145, 11);
+  width: 150px;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: white;
+  border-radius: 10px;
+  transition: all 2s ease;
+}
+
+.InvalidLogin {
+  position: absolute;
+  z-index: 99;
+  background-color: rgb(172, 8, 8);
+  width: 150px;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: white;
+  border-radius: 10px;
+  transition: all 2s ease;
+}

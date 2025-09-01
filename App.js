@@ -1,7 +1,9 @@
 const express = require("express");
 const fs = require("fs");
+const path = require("path");
 const cors = require("cors");
 const hash = require("bcrypt");
+const cookie = require("cookie-parser");
 const database = require("./model/Database");
 const ValidasiSign = require("./service/Validasi/ValidasiInputanSign");
 const ValidasiInputanLogin = require("./service/Validasi/ValidasiInputanLogin");
@@ -9,14 +11,29 @@ const { verifyToken } = require("./middleware/verify/VerifyTokenHeader");
 
 const app = express();
 app.use(express.json());
+app.use(cookie());
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // izin kan hanya user yang diizinkn oleh
 // croos origin recourse sharing yang boleh akses
 app.use(cors());
 
+// get cookie data
+
+app.get("/Cookie", (req, res) => {
+  const validCookie = req.cookies;
+
+  if (!validCookie) {
+    console.log("not valid");
+  }
+
+  res.setHeader("authorization", "dia");
+});
+
 // route for documentation pages
 
-app.get("/documentation", (req, res) => {
+app.get("/documentation", verifyToken, (req, res) => {
   fs.readFile(
     "./src/documentation/documentationApi.html",
     (err, documentation) => {
@@ -32,7 +49,13 @@ app.get("/documentation", (req, res) => {
 // root page
 
 app.get("/", (req, res) => {
-  res.send("Api Server");
+  fs.readFile("src/Pages/Login.html", (err, pages) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.end(pages);
+  });
 });
 
 // user juga berikan akses verifytoken
@@ -89,7 +112,7 @@ app.post("/Register", (req, res) => {
 
 // route for Login pages
 
-app.get("/Login", (req, res) => {
+app.post("/Login", (req, res) => {
   const { email, password } = req.body;
 
   ValidasiInputanLogin.module(email, password, res);
@@ -97,7 +120,7 @@ app.get("/Login", (req, res) => {
 
 // route untuk delete user from database
 
-app.delete("/delete", (req, res) => {
+app.delete("/delete", verifyToken, (req, res) => {
   // ambil data dari inputan user
 
   const { email } = req.body;

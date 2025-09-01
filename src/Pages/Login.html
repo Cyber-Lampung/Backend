@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Api</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="notification">
+      <div class="SuccesStatus" id="succes">
+        <span class="succes">
+          <p>Succes Login</p>
+        </span>
+      </div>
+      <div class="InvalidLogin" id="invalid">
+        <span class="Invalid">
+          <p>Invalid Login</p>
+        </span>
+      </div>
+    </div>
+    <div class="boxLogin">
+      <form id="form">
+        <div>
+          <div class="Title">
+            <h1>Login Api App</h1>
+          </div>
+          <div class="InputSytem">
+            <input type="email" placeholder="Email" id="email" class="email" />
+            <br /><br />
+            <input
+              type="password"
+              placeholder="Password"
+              id="password"
+              class="password"
+            />
+          </div>
+
+          <div class="Btn">
+            <button class="btn" id="btnSend" type="submit">Login</button>
+          </div>
+          <div>
+            <div class="lpPass">
+              <p>Lupa Password ?</p>
+              <a href="/reset">Reset</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="index.js"></script>
+    <script src="Javascript/animation.js"></script>
+  </body>
+</html>
