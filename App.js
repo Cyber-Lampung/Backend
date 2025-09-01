@@ -49,7 +49,7 @@ app.get("/documentation", verifyToken, (req, res) => {
 // root page
 
 app.get("/", (req, res) => {
-  fs.readFile("src/Pages/Login.html", (err, pages) => {
+  fs.readFile("./src/Pages/Login.html", (err, pages) => {
     if (err) {
       console.log(err);
     }
