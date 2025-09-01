@@ -29,6 +29,12 @@ app.get("/documentation", (req, res) => {
   );
 });
 
+// root page
+
+app.get("/", (req, res) => {
+  res.send("Api Server");
+});
+
 // user juga berikan akses verifytoken
 
 app.get("/user", verifyToken, (req, res) => {
@@ -128,6 +134,6 @@ app.get("/dashboard", verifyToken, (req, res) => {
 });
 
 // untuk menjalankan code ke listener network
-app.listen(3000, "127.0.0.1", () => {
+app.listen(3000, () => {
   console.log("Succes Listen In port 3000");
 });
