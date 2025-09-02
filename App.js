@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // izin kan hanya user yang diizinkn oleh
 // croos origin recourse sharing yang boleh akses
 app.use(cors(
-    origin: "*", // atau ganti dengan URL frontend misal: "https://frontend.vercel.app"
+    origin: "https://jasapembuatanwebsite-chi.vercel.app", // atau ganti dengan URL frontend misal: "https://frontend.vercel.app"
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"]
 ));
