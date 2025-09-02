@@ -19,9 +19,18 @@ app.use(express.static(path.join(__dirname, "public")));
 // croos origin recourse sharing yang boleh akses
 app.use(
   cors({
+    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     origin: "https://jasapembuatanwebsite-chi.vercel.app",
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "device-remember-token",
+      "Access-Control-Allow-Origin",
+      "Origin",
+      "Accept",
+    ],
     credentials: true,
   })
 );
@@ -85,11 +94,9 @@ app.get("/user", verifyToken, (req, res) => {
 
 // route untuk Register pages
 app.post("/Register", (req, res) => {
-  const { id, email, username, password } = req.body;
+  const { email, username, password } = req.body;
 
-  // function Validasi
-
-  ValidasiSign.module(id, email, username, password, res);
+  ValidasiSign.module(email, username, password, res);
 
   // const secretKey = "rahasiaSuperAman";
 
@@ -103,8 +110,8 @@ app.post("/Register", (req, res) => {
   hash.hash(password, saltRounds, (err, Passhash) => {
     try {
       database.module.query(
-        "insert into user (id, email, username, password) values (?, ?, ?, ?)",
-        [id, email, username, Passhash],
+        "insert into user (id, email, username, password) values (?, ?, ?)",
+        [email, username, Passhash],
         (user, err) => {
           if (err) {
             console.log(err);
@@ -172,9 +179,6 @@ app.get("/favicon.ico", (req, res) => {
     res.end(ico);
   });
 });
-
-// tambahkan hendler OPTIONS untuk preflight
-app.options("*", cors());
 
 // tangani request yang error
 

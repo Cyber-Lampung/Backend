@@ -2,7 +2,7 @@ const database = require("../../model/Database");
 const jwt = require("jsonwebtoken");
 const hash = require("bcrypt");
 
-function ValidasiSign(id, email, username, password, res) {
+function ValidasiSign(email, username, password, res) {
   const secretKey = "rahasiaSuperAman";
 
   const token = jwt.sign({ username: username }, secretKey, {
