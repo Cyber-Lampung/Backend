@@ -19,9 +19,10 @@ app.use(express.static(path.join(__dirname, "public")));
 // croos origin recourse sharing yang boleh akses
 app.use(
   cors({
-    origin: "https://jasapembuatanwebsite-chi.vercel.app/",
+    origin: "https://jasapembuatanwebsite-chi.vercel.app",
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "authorization"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
@@ -162,7 +163,7 @@ app.get("/dashboard", verifyToken, (req, res) => {
   res.send("hello ini dashboard");
 });
 
-app.get("/favico.ico", (req, res) => {
+app.get("/favicon.ico", (req, res) => {
   fs.readFile("favico.ico", (err, ico) => {
     if (err) {
       res.end(err);
@@ -174,6 +175,17 @@ app.get("/favico.ico", (req, res) => {
 
 // tambahkan hendler OPTIONS untuk preflight
 app.options("*", cors());
+
+// tangani request yang error
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://jasapembuatanwebsite-chi.vercel.app"
+  );
+  res.status(500).json({ error: "Internal Server Error" });
+});
 
 // untuk menjalankan code ke listener network
 app.listen(3000, () => {
