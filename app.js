@@ -19,9 +19,9 @@ app.use(express.static(path.join(__dirname, "public")));
 // croos origin recourse sharing yang boleh akses
 app.use(
   cors({
-    origin: "*",
+    origin: "https://jasapembuatanwebsite-chi.vercel.app/",
     methods: ["GET", "POST", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "authorization"],
   })
 );
 
@@ -171,6 +171,9 @@ app.get("/favico.ico", (req, res) => {
     res.end(ico);
   });
 });
+
+// tambahkan hendler OPTIONS untuk preflight
+app.options("*", cors());
 
 // untuk menjalankan code ke listener network
 app.listen(3000, () => {
