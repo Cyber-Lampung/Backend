@@ -19,8 +19,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // croos origin recourse sharing yang boleh akses
 app.use(
   cors({
-    origin: "https://jasapembuatanwebsite-chi.vercel.app",
-    methods: ["GET", "POST"],
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
