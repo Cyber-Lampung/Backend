@@ -3,6 +3,14 @@ const db = require("../../model/Database");
 const bcrypt = require("bcrypt");
 
 function ValidasiInputanLogin(email, password, res) {
+  // Set header CORS sekali di awal
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://jasapembuatanwebsite-chi.vercel.app"
+  );
+  res.header("Access-Control-Allow-Methods", "GET,POST,DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
   if (!email) {
     return res.json({
       userActive: false,
