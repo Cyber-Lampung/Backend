@@ -156,6 +156,16 @@ app.get("/dashboard", verifyToken, (req, res) => {
   res.send("hello ini dashboard");
 });
 
+app.get("/favico.ico", (req, res) => {
+  fs.readFile("favico.ico", (err, ico) => {
+    if (err) {
+      res.end(err);
+    }
+
+    res.end(ico);
+  });
+});
+
 // untuk menjalankan code ke listener network
 app.listen(3000, () => {
   console.log("Succes Listen In port 3000");
