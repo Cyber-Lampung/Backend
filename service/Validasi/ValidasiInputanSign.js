@@ -10,10 +10,24 @@ function ValidasiSign(email, username, password, res) {
     expiresIn: "1h",
   });
 
-  if (!id || !email || !username || !password) {
+  if (!email || !username || !password) {
     return res.json({ active: false });
-  } else {
-    return res.json({ active: true, token: token });
+  }
+
+  try {
+    database.module.query(
+      "insert into user (email, username, password) values (?, ?, ?) ",
+      [email, username, password],
+      (err, result) => {
+        if (err) {
+          res.json({ valid: false });
+        }
+
+        res.json({ valid: true, token: token });
+      }
+    );
+  } catch {
+    console.log("invalid");
   }
 }
 

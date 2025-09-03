@@ -96,6 +96,10 @@ app.get("/user", verifyToken, (req, res) => {
 app.post("/Register", (req, res) => {
   const { email, username, password } = req.body;
 
+  console.log(req.body);
+
+  console.log(email, username, password);
+
   ValidasiSign.module(email, username, password, res);
 
   // const secretKey = "rahasiaSuperAman";
@@ -105,28 +109,30 @@ app.post("/Register", (req, res) => {
   //   expiresIn: "1h",
   // });
 
-  const saltRounds = 10;
+  // const saltRounds = 10;
 
-  hash.hash(password, saltRounds, (err, Passhash) => {
-    try {
-      database.module.query(
-        "insert into user (id, email, username, password) values (?, ?, ?)",
-        [email, username, Passhash],
-        (user, err) => {
-          if (err) {
-            console.log(err);
-          }
-        }
-      );
-    } catch {
-      console.log("error");
-    }
-  });
+  // hash.hash(password, saltRounds, (err, Passhash) => {
+  //   try {
+  //     database.module.query(
+  //       "insert into user (email, username, password) values (?, ?, ?)",
+  //       [email, username, Passhash],
+  //       (user, err) => {
+  //         if (err) {
+  //           console.log(err);
+  //         }
+  //       }
+  //     );
+  //   } catch {
+  //     console.log("error");
+  //   }
+  // });
 });
 
 // route for Login pages
 
 app.post("/Login", (req, res) => {
+  // debug
+  // console.log(req.body);
   const { email, password } = req.body;
 
   ValidasiInputanLogin.module(email, password, res);
